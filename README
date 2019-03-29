@@ -1,0 +1,8 @@
+i3-config uses next packages:
+
+-"feh" for wallpapers
+-"flameshot" for print screen
+-"compton" for smooth workspace switching
+-"rofi" as dMenu alternative
+
+Spotify assigned to ws10
