@@ -1,0 +1,36 @@
+How to connect to WIFI:
+1. Use nmcli dev wifi to locate the access point(AP) name. 
+2. Use nmcli device wifi connect APname password
+
+
+Reload i3: $mod+shift+c
+Restart i3: $mod+shift+r
+
+
+To find PID of process you need:
+$ ps aux | grep -i [name_of_process]
+
+
+To mount pendrive:
+1. Get name of your flash:
+$ lsblk
+2. Mount that drive:
+$ sudo mount /dev/sdb1 /media/usb
+3. Go to dir
+
+
+To recover fi-wi drivers use:
+1. Delete folder /lib/firmware/ath10k/QCA9377
+2. Copy folder QCA9377 from .ath10k to previous to previous path
+3. Copy file firmware-5.bin_WLAN.TF.1.0-00002-QCATFSWPZ-5 to 
+/lib/firmware/ath10k/QCA9377/hw1.0/firmware-5.bin
+4. Reboot.
+
+
+To assign window to workspace:
+1. Write to terminal 'xprop' then click on window you need
+2. Copy value of WM_CLASS(STRING);
+3. Write to i3 config file:
+	for_window [class="WM_CLASS"] move to workspace [ws_number]
+
+

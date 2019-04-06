@@ -42,7 +42,9 @@ bindsym $mod+Shift+q kill
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
 bindsym $mod+d exec rofi -show run -theme ~/.material.rasi -font "System San Francisco Display 12"
+
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -132,6 +134,12 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 #Assigns Spotify to Workspace 10
 for_window [class="Spotify"] move to workspace $ws10
+
+#Assign Telegram to Workspace 3
+for_window [class="Telegram"] move to workspace $ws3
+
+#Assign VSCode to Workspace 1
+for_window [class="code-oss"] move to workspace $ws1
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
