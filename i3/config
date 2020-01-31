@@ -20,9 +20,7 @@ font pango:System San Francisco Display 8
 #font pango:DejaVu Sans Mono 8
 
 # Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1 # The font above is very space-efficient, that is, it looks good, sharp and # clear in small sizes. However, its unicode glyph coverage is limited, the old
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
@@ -30,7 +28,8 @@ font pango:System San Francisco Display 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+t exec i3-sensible-terminal
+bindsym $mod+t exec --no-startup-id i3-sensible-terminal 
+#for_window [class="URxvt"] floating enable
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -132,14 +131,26 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
-#Assigns Spotify to Workspace 10
-for_window [class="Spotify"] move to workspace $ws10
+#Assign VSCode to Workspace 1
+for_window [class="code-oss"] move to workspace $ws1
+
+#Assign Chrome to Workspace 2
+for_window [class="Chromium"] move to workspace $ws2
 
 #Assign Telegram to Workspace 3
 for_window [class="Telegram"] move to workspace $ws3
 
-#Assign VSCode to Workspace 1
-for_window [class="code-oss"] move to workspace $ws1
+#Assign Kodi to Workspace 4
+for_window [class="Kodi"] move to workspace $ws4
+
+#Assign Lingvo to Workspace 5
+for_window [class="GoldenDict"] move to workspace $ws5
+
+#Assigns Steam to Workspace 6
+for_window [class="Steam"] move to workspace $ws6
+
+#Assigns Spotify to Workspace 10
+for_window [class="Spotify"] move to workspace $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -177,21 +188,21 @@ bindsym $mod+r mode "resize"
 
 
 
-set $bg-color 	         #2f343f
-set $inactive-bg-color   #2f343f
+#set $bg-color 	         #eaeaeb //white
+#set $bg-color 	         #d2275a //cyberpunk
+#set $bg-color 	         #2f343f //original
+set $bg-color 	         #4D4D4C
+set $inactive-bg-color   #171a1f
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
 
 # window colors
 #                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $text-color          #00ff00
-client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
-client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
-client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
-
-
-
+client.focused          $bg-color           $bg-color          $text-color          $inactive-bg-color
+client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color $inactive-bg-color
+client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color $inactive-bg-color
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $inactive-bg-color
 
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
@@ -212,7 +223,9 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh
 #}
 
 #Hotkey for locking screen
-bindsym $mod+shift+x exec i3lock --color "$bg-color"
+#bindsym $mod+shift+x exec i3lock --color "$bg-color"
+bindsym $mod+shift+x exec /home/isel/.config/lock.sh 
+
 
 #Wallpaper
 exec_always feh --bg-scale /home/isel/.wallpaper/wallpaper.jpg
@@ -221,7 +234,7 @@ exec_always feh --bg-scale /home/isel/.wallpaper/wallpaper.jpg
 bindsym Print exec flameshot gui
 
 #No title bar
-new_window pixel 0
+new_window pixel 1
 default_border pixel 1
 hide_edge_borders horizontal
 
@@ -249,4 +262,5 @@ bindsym XF86AudioPrev exec playerctl previous
 # VertScrollDelta - sensitivity, use negative to invert gesture.
 exec synclient TapButton1=1 TapButton2=3 TapButton3=2 VertTwoFingerScroll=1 VertScrollDelta=-48
 
-#exec_always compton -f
+#exec compton -f
+

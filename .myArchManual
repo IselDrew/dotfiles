@@ -1,6 +1,17 @@
-How to connect to WIFI:
-1. Use nmcli dev wifi to locate the access point(AP) name. 
-2. Use nmcli device wifi connect APname password
+To connect to WIFI:
+1. Use 
+  $ nmcli dev wifi 
+to locate the access point(AP) name. 
+2. Use 
+  $ nmcli device wifi connect APname password
+	OR
+1. Use graphical interface nmtui
+
+
+To change urxvt:
+1. Use .Xresources file
+2. Change it
+3.  $ xrdb .Xresources
 
 
 Reload i3: $mod+shift+c
@@ -8,24 +19,34 @@ Restart i3: $mod+shift+r
 
 
 To find PID of process you need:
-$ ps aux | grep -i [name_of_process]
-
+  $ ps aux | grep -i [name_of_process]
+(first value after username)
 
 To mount pendrive:
 1. Get name of your flash:
-$ lsblk
-2. Mount that drive:
-$ sudo mount /dev/sdb1 /media/usb
-3. Go to dir
+  $ lsblk
+!2. Create directory to mount:
+  $ mkdir /media/usb
+3. Mount that drive:
+  $ sudo mount /dev/sdb1 /media/usb
+4. Go to dir
+5. Don't forget to unmount it:
+  $ sudo umount /dev/sdb1
 
 
-To recover fi-wi drivers use:
+To recover wi-fi drivers use:
 1. Delete folder /lib/firmware/ath10k/QCA9377
-2. Copy folder QCA9377 from .ath10k to previous to previous path
-3. Copy file firmware-5.bin_WLAN.TF.1.0-00002-QCATFSWPZ-5 to 
-/lib/firmware/ath10k/QCA9377/hw1.0/firmware-5.bin
+2. Copy folder QCA9377 from .ath10k-firmware-master/ to previous path
+3. Copy file firmware-5.bin_WLAN.TF.1.0-00002-QCATFSWPZ-5 from
+	/lib/firmware/ath10k/QCA9377/hw1.0/WLAN.TF.1.0 to 
+	/lib/firmware/ath10k/QCA9377/hw1.0/firmware-5.bin
 4. Reboot.
 
+To solve login-loop:
+1. Check the permission of Xauthority
+  $ ls -lah | grep -i Xauthority
+2. If you see "root" listed there, you've found the source of problem, then write:
+  $ sudo chown username:username .Xauthority
 
 To assign window to workspace:
 1. Write to terminal 'xprop' then click on window you need
@@ -33,4 +54,41 @@ To assign window to workspace:
 3. Write to i3 config file:
 	for_window [class="WM_CLASS"] move to workspace [ws_number]
 
+
+To remap caps-lock:
+1. $ cd /usr/share/X11/xkb/symbols
+2. $ sudo vim pc
+
+
+To kill process:
+1. Get pid of process: 
+	$ pstree -p
+2. $ kill [pid]
+	OR
+3. $ killall [name_of_process]
+
+
+To save just mp3 from youtube:
+$ youtube-dl --extract-audio --audio-format mp3 <video URL>
+
+
+grep -i installed /var/log/pacman.log
+
+
+To rotate screen use:
+$ xrandr -o [left, right, normal]
+
+Star wars in terminal:
+$ telnet towel.blinkenlights.nl
+
+Loop problem: 
+sudo gedit /etc/default/grub
+Find this line: GRUB_CMDLINE_LINUX=""
+Change it to GRUB_CMDLINE_LINUX="iommu=soft"
+Save
+Reboot
+
+To solve npm-vulnerabilities problems:
+1. npm outdated
+2. npm audit fix
 

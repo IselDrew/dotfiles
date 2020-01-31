@@ -47,9 +47,9 @@ font-3 = "Font Awesome 5 Free:style=Regular:pixelsize=9;1"
 font-4 = "Font Awesome 5 Free:style=Solid:pixelsize=9;1"
 font-5 = "Font Awesome 5 Brands:pixelsize=9;1"
 
-modules-left = logout i3 media 
-modules-center = clock date  
-modules-right = cpu wireless-network battery pulseaudio xbacklight xkeyboard
+modules-left = logout i3 
+modules-center = clock date temperature
+modules-right = volume backlight cpu wireless-network battery xkeyboard
 tray-position = right
 tray-padding = 0
 
@@ -73,9 +73,9 @@ cursor-scroll = ns-resize
 type = custom/script
 exec = $HOME/.config/polybar/player.sh
 interval = 3
-click-left = playerctl previous
-click-right = playerctl next
-click-middle = playerctl play-pause
+click-right = playerctl previous
+click-middle = playerctl next
+click-left = playerctl play-pause
 
 [module/logout]
 type = custom/text
@@ -146,8 +146,8 @@ type = internal/i3
 ws-icon-0 = 1;
 ws-icon-1 = 2;
 ws-icon-2 = 3;
-ws-icon-3 = 4;
-ws-icon-4 = 5;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
 ws-icon-5 = 6;
 ws-icon-6 = 7;
 ws-icon-7 = 8;
@@ -187,6 +187,7 @@ label-urgent-background = ${module/bspwm.label-urgent-background}
 label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
 
+
 [module/mpd]
 type = internal/mpd
 format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
@@ -199,6 +200,12 @@ icon-next = 
 
 label-song-maxlen = 25
 label-song-ellipsis = true
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+format = <label>
+label =  %percentage%%
 
 [module/xbacklight]
 type = internal/xbacklight
@@ -301,6 +308,20 @@ type = custom/text
 click-left = exec chromium https://calendar.google.com
 content = ""
 
+[module/volume]
+type = internal/volume
+;speaker-mixer = Speaker
+;headphone-mixer = Headphone
+:headphone-id = 9
+
+format-volume = <ramp-volume> <label-volume>
+label-muted =  0%
+label-muted-foreground = #66
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
 
 [module/pulseaudio]
 type = internal/pulseaudio
